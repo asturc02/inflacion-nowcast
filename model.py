@@ -13,6 +13,8 @@ from typing import Any
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import Ridge
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
 
 import config
 import features as feat
@@ -59,7 +61,10 @@ def fit_predict_ridge(
     if len(train_mask) < 6:  # Too little data — fall back to naïve.
         return seasonal_naive(df, target, predict_idx)
 
-    model = Ridge(alpha=alpha)
+    # Standardize features before Ridge: the FX column ranges 0–118% (the 2023
+    # devaluation) while inflation lags are ~1–25%, so unscaled penalization
+    # would distort the fit. A scaler keeps coefficients comparable.
+    model = make_pipeline(StandardScaler(), Ridge(alpha=alpha))
     model.fit(x_all.iloc[train_mask], y.iloc[train_mask])
     return float(model.predict(x_all.iloc[[predict_idx]])[0])
 

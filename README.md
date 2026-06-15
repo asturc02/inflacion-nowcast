@@ -21,9 +21,11 @@
   (MAE / RMSE).
 - **Explains** each nowcast in plain Spanish via an optional LLM module ("Lectura del mes").
 
-> The public demo runs on a **synthetic but realistic** dataset (committed) that mirrors
-> Argentina's 2021–2026 path, so the dashboard renders with zero setup. Wire in the live
-> sources for real data.
+> Uses **real official data**: INDEC IPC (nivel general, núcleo, estacional, regulados, and
+> the 12 COICOP divisions) and dólar oficial/blue, pulled live from the datos.gob.ar Series
+> API and Bluelytics. A committed snapshot lets the dashboard render with zero setup; the
+> "Actualizar datos" button re-fetches the latest. (A synthetic generator remains as an
+> offline fallback only.)
 
 ---
 
@@ -93,7 +95,8 @@ copy .env.example .env             # set ANTHROPIC_API_KEY=sk-ant-...
 
 - **Targets:** monthly MoM % for *nivel general* and *núcleo*, plus per-area.
 - **Features:** own lag(1), seasonal lag(12), month dummies, dólar MoM (oficial & blue),
-  SEPA food MoM, REM expectation.
+  REM expectation (where available). Missing/lagging indicators are forward-filled to the
+  current regime, and features are standardized before the model. *(SEPA food MoM planned.)*
 - **Models:** regularized **Ridge** nowcast vs **seasonal-naïve** and the **REM** consensus.
 - **Validation:** expanding-window rolling backtest; report MAE / RMSE for all three.
 - **Bottom-up:** per-area nowcasts aggregated by INDEC division weights into the headline;

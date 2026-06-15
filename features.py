@@ -103,4 +103,7 @@ def design_matrix(df: pd.DataFrame, cols: list[str]) -> pd.DataFrame:
         dummies = pd.get_dummies(x["month"], prefix="m")
         x = pd.concat([x.drop(columns=["month"]), dummies], axis=1)
     x = x.apply(pd.to_numeric, errors="coerce")
-    return x.fillna(x.mean(numeric_only=True)).fillna(0.0)
+    # Forward-fill missing indicators (rows are date-ordered) so a stale/lagging
+    # source is imputed with its most recent value — the current regime — rather
+    # than the full-history mean, which would be biased by past high-inflation.
+    return x.ffill().fillna(0.0)

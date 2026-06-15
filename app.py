@@ -59,18 +59,18 @@ def render_sidebar() -> None:
     st.sidebar.title("📊 Nowcast Inflación")
     st.sidebar.markdown('<div class="brand">Built by Cristopher Astur | UBA Economist</div>', unsafe_allow_html=True)
     st.sidebar.divider()
-    if st.sidebar.button("🔄 Recalcular nowcast", use_container_width=True):
+    if st.sidebar.button("🔄 Actualizar datos (INDEC)", use_container_width=True):
         try:
-            with st.spinner("Recalculando..."):
-                pipeline.build(force_sample=True)
+            with st.spinner("Descargando INDEC y recalculando..."):
+                pipeline.build(force_sample=False)
             _load.clear()
-            st.sidebar.success("Nowcast actualizado.")
+            st.sidebar.success("Datos actualizados desde INDEC.")
         except Exception as exc:  # noqa: BLE001
-            st.error(f"No se pudo recalcular: {exc}")
+            st.error(f"No se pudo actualizar: {exc}")
     st.sidebar.divider()
     st.sidebar.caption(
-        "Fuentes: INDEC (IPC), SEPA/Precios Claros (alta frecuencia), "
-        "BCRA REM (consenso), dólar (Bluelytics)."
+        "Fuentes en vivo: INDEC IPC (datos.gob.ar Series API), dólar oficial/blue "
+        "(Bluelytics), BCRA REM (consenso, parcial). SEPA/Precios Claros: en desarrollo."
     )
 
 

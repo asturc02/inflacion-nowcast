@@ -1,330 +1,666 @@
 {
   "target_month": "2026-06-01",
   "target_month_label": "junio 2026",
-  "headline": 2.07,
-  "core": 1.83,
-  "band_low": 0.12,
-  "band_high": 4.02,
-  "last_official": 3.57,
-  "rem_headline": 2.3,
+  "headline": 2.66,
+  "core": 2.16,
+  "band_low": 1.5,
+  "band_high": 3.81,
+  "last_official": 2.15,
+  "rem_headline": null,
   "areas": {
-    "alimentos": 7.4,
-    "energia_vivienda": 8.72,
-    "transporte": 7.7,
-    "indumentaria": 5.83,
-    "salud": 6.0,
-    "educacion": 4.0,
-    "equipamiento": 6.18,
-    "comunicacion": 4.31,
-    "recreacion": 6.8,
-    "restaurantes": 7.14,
-    "otros": 6.48
+    "alimentos": 1.51,
+    "energia_vivienda": 3.0,
+    "transporte": 1.8,
+    "indumentaria": 0.39,
+    "salud": 2.38,
+    "educacion": 3.31,
+    "equipamiento": 1.65,
+    "comunicacion": 2.61,
+    "recreacion": 2.62,
+    "restaurantes": 1.94,
+    "otros": 1.68
   },
   "backtest": {
     "series": [
       {
+        "date": "2019-01-01",
+        "actual": 2.91,
+        "nowcast": 1.83,
+        "rem": 2.5,
+        "naive": 1.76
+      },
+      {
+        "date": "2019-02-01",
+        "actual": 3.77,
+        "nowcast": 4.17,
+        "rem": 3.5,
+        "naive": 2.42
+      },
+      {
+        "date": "2019-03-01",
+        "actual": 4.68,
+        "nowcast": 4.85,
+        "rem": 3.8,
+        "naive": 2.34
+      },
+      {
+        "date": "2019-04-01",
+        "actual": 3.4,
+        "nowcast": 5.7,
+        "rem": 4.0,
+        "naive": 2.74
+      },
+      {
+        "date": "2019-05-01",
+        "actual": 3.1,
+        "nowcast": 2.03,
+        "rem": 3.0,
+        "naive": 2.08
+      },
+      {
+        "date": "2019-06-01",
+        "actual": 2.72,
+        "nowcast": 2.78,
+        "rem": 2.6,
+        "naive": 3.74
+      },
+      {
+        "date": "2019-07-01",
+        "actual": 2.2,
+        "nowcast": 2.17,
+        "rem": 2.4,
+        "naive": 3.1
+      },
+      {
+        "date": "2019-08-01",
+        "actual": 3.95,
+        "nowcast": 4.44,
+        "rem": 4.3,
+        "naive": 3.89
+      },
+      {
+        "date": "2019-09-01",
+        "actual": 5.89,
+        "nowcast": 5.07,
+        "rem": 5.8,
+        "naive": 6.53
+      },
+      {
+        "date": "2019-10-01",
+        "actual": 3.29,
+        "nowcast": 5.32,
+        "rem": 4.2,
+        "naive": 5.39
+      },
+      {
+        "date": "2019-11-01",
+        "actual": 4.25,
+        "nowcast": 2.82,
+        "rem": 4.1,
+        "naive": 3.15
+      },
+      {
+        "date": "2019-12-01",
+        "actual": 3.74,
+        "nowcast": 4.35,
+        "rem": 4.1,
+        "naive": 2.57
+      },
+      {
+        "date": "2020-01-01",
+        "actual": 2.25,
+        "nowcast": 3.2,
+        "rem": 3.5,
+        "naive": 2.91
+      },
+      {
+        "date": "2020-02-01",
+        "actual": 2.01,
+        "nowcast": 2.76,
+        "rem": 2.5,
+        "naive": 3.77
+      },
+      {
+        "date": "2020-03-01",
+        "actual": 3.34,
+        "nowcast": 2.59,
+        "rem": 2.6,
+        "naive": 4.68
+      },
+      {
+        "date": "2020-04-01",
+        "actual": 1.5,
+        "nowcast": 2.73,
+        "rem": 2.3,
+        "naive": 3.4
+      },
+      {
+        "date": "2020-05-01",
+        "actual": 1.54,
+        "nowcast": -0.69,
+        "rem": 1.7,
+        "naive": 3.1
+      },
+      {
+        "date": "2020-06-01",
+        "actual": 2.24,
+        "nowcast": 2.47,
+        "rem": 2.0,
+        "naive": 2.72
+      },
+      {
+        "date": "2020-07-01",
+        "actual": 1.93,
+        "nowcast": 2.5,
+        "rem": 2.4,
+        "naive": 2.2
+      },
+      {
+        "date": "2020-08-01",
+        "actual": 2.7,
+        "nowcast": 2.49,
+        "rem": 2.7,
+        "naive": 3.95
+      },
+      {
+        "date": "2020-09-01",
+        "actual": 2.84,
+        "nowcast": 4.14,
+        "rem": 3.0,
+        "naive": 5.89
+      },
+      {
+        "date": "2020-10-01",
+        "actual": 3.76,
+        "nowcast": 2.48,
+        "rem": 3.2,
+        "naive": 3.29
+      },
+      {
+        "date": "2020-11-01",
+        "actual": 3.16,
+        "nowcast": 3.5,
+        "rem": 3.6,
+        "naive": 4.25
+      },
+      {
+        "date": "2020-12-01",
+        "actual": 4.01,
+        "nowcast": 3.66,
+        "rem": 3.99,
+        "naive": 3.74
+      },
+      {
+        "date": "2021-01-01",
+        "actual": 4.05,
+        "nowcast": 3.46,
+        "rem": 3.85,
+        "naive": 2.25
+      },
+      {
+        "date": "2021-02-01",
+        "actual": 3.57,
+        "nowcast": 3.98,
+        "rem": 3.5,
+        "naive": 2.01
+      },
+      {
+        "date": "2021-03-01",
+        "actual": 4.81,
+        "nowcast": 3.97,
+        "rem": 3.9,
+        "naive": 3.34
+      },
+      {
+        "date": "2021-04-01",
+        "actual": 4.08,
+        "nowcast": 3.9,
+        "rem": 3.8,
+        "naive": 1.5
+      },
+      {
+        "date": "2021-05-01",
+        "actual": 3.32,
+        "nowcast": 2.9,
+        "rem": 3.56,
+        "naive": 1.54
+      },
+      {
+        "date": "2021-06-01",
+        "actual": 3.17,
+        "nowcast": 3.18,
+        "rem": 3.2,
+        "naive": 2.24
+      },
+      {
+        "date": "2021-07-01",
+        "actual": 3.0,
+        "nowcast": 2.69,
+        "rem": 3.0,
+        "naive": 1.93
+      },
+      {
+        "date": "2021-08-01",
+        "actual": 2.47,
+        "nowcast": 2.94,
+        "rem": 2.8,
+        "naive": 2.7
+      },
+      {
+        "date": "2021-09-01",
+        "actual": 3.55,
+        "nowcast": 3.6,
+        "rem": 2.8,
+        "naive": 2.84
+      },
+      {
+        "date": "2021-10-01",
+        "actual": 3.52,
+        "nowcast": 3.25,
+        "rem": 3.2,
+        "naive": 3.76
+      },
+      {
+        "date": "2021-11-01",
+        "actual": 2.53,
+        "nowcast": 3.05,
+        "rem": 3.1,
+        "naive": 3.16
+      },
+      {
+        "date": "2021-12-01",
+        "actual": 3.84,
+        "nowcast": 3.25,
+        "rem": 3.4,
+        "naive": 4.01
+      },
+      {
+        "date": "2022-01-01",
+        "actual": 3.88,
+        "nowcast": 3.2,
+        "rem": 3.8,
+        "naive": 4.05
+      },
+      {
+        "date": "2022-02-01",
+        "actual": 4.69,
+        "nowcast": 3.68,
+        "rem": 3.9,
+        "naive": 3.57
+      },
+      {
+        "date": "2022-03-01",
+        "actual": 6.73,
+        "nowcast": 4.98,
+        "rem": 5.46,
+        "naive": 4.81
+      },
+      {
+        "date": "2022-04-01",
+        "actual": 6.05,
+        "nowcast": 5.45,
+        "rem": 5.6,
+        "naive": 4.08
+      },
+      {
+        "date": "2022-05-01",
+        "actual": 5.05,
+        "nowcast": 4.66,
+        "rem": 5.2,
+        "naive": 3.32
+      },
+      {
+        "date": "2022-06-01",
+        "actual": 5.3,
+        "nowcast": 4.79,
+        "rem": 5.21,
+        "naive": 3.17
+      },
+      {
+        "date": "2022-07-01",
+        "actual": 7.41,
+        "nowcast": 4.8,
+        "rem": 7.5,
+        "naive": 3.0
+      },
+      {
+        "date": "2022-08-01",
+        "actual": 6.97,
+        "nowcast": 6.94,
+        "rem": 6.5,
+        "naive": 2.47
+      },
+      {
+        "date": "2022-09-01",
+        "actual": 6.17,
+        "nowcast": 7.56,
+        "rem": 6.7,
+        "naive": 3.55
+      },
+      {
+        "date": "2022-10-01",
+        "actual": 6.35,
+        "nowcast": 6.01,
+        "rem": 6.51,
+        "naive": 3.52
+      },
+      {
+        "date": "2022-11-01",
+        "actual": 4.92,
+        "nowcast": 6.01,
+        "rem": 6.1,
+        "naive": 2.53
+      },
+      {
+        "date": "2022-12-01",
+        "actual": 5.12,
+        "nowcast": 5.61,
+        "rem": 5.5,
+        "naive": 3.84
+      },
+      {
         "date": "2023-01-01",
-        "actual": 16.44,
-        "nowcast": 15.76,
-        "rem": 15.75,
-        "naive": 10.14
+        "actual": 6.03,
+        "nowcast": 4.93,
+        "rem": 5.59,
+        "naive": 3.88
       },
       {
         "date": "2023-02-01",
-        "actual": 17.44,
-        "nowcast": 17.61,
-        "rem": 16.84,
-        "naive": 11.73
+        "actual": 6.63,
+        "nowcast": 5.9,
+        "rem": 6.1,
+        "naive": 4.69
       },
       {
         "date": "2023-03-01",
-        "actual": 18.81,
-        "nowcast": 20.41,
-        "rem": 20.53,
-        "naive": 12.17
+        "actual": 7.68,
+        "nowcast": 6.95,
+        "rem": 7.0,
+        "naive": 6.73
       },
       {
         "date": "2023-04-01",
-        "actual": 19.37,
-        "nowcast": 19.75,
-        "rem": 20.63,
-        "naive": 12.03
+        "actual": 8.4,
+        "nowcast": 6.75,
+        "rem": 7.5,
+        "naive": 6.05
       },
       {
         "date": "2023-05-01",
-        "actual": 19.84,
-        "nowcast": 19.34,
-        "rem": 19.55,
-        "naive": 13.21
+        "actual": 7.77,
+        "nowcast": 7.51,
+        "rem": 9.0,
+        "naive": 5.05
       },
       {
         "date": "2023-06-01",
-        "actual": 20.11,
-        "nowcast": 18.38,
-        "rem": 19.85,
-        "naive": 12.67
+        "actual": 5.95,
+        "nowcast": 7.44,
+        "rem": 7.3,
+        "naive": 5.3
       },
       {
         "date": "2023-07-01",
-        "actual": 21.28,
-        "nowcast": 20.38,
-        "rem": 20.48,
-        "naive": 13.93
+        "actual": 6.34,
+        "nowcast": 5.83,
+        "rem": 7.0,
+        "naive": 7.41
       },
       {
         "date": "2023-08-01",
-        "actual": 19.91,
-        "nowcast": 19.48,
-        "rem": 18.57,
-        "naive": 13.52
+        "actual": 12.44,
+        "nowcast": 8.58,
+        "rem": 11.78,
+        "naive": 6.97
       },
       {
         "date": "2023-09-01",
-        "actual": 20.1,
-        "nowcast": 20.01,
-        "rem": 20.02,
-        "naive": 13.7
+        "actual": 12.75,
+        "nowcast": 11.89,
+        "rem": 11.67,
+        "naive": 6.17
       },
       {
         "date": "2023-10-01",
-        "actual": 20.36,
-        "nowcast": 20.24,
-        "rem": 19.66,
-        "naive": 13.84
+        "actual": 8.3,
+        "nowcast": 10.84,
+        "rem": 10.0,
+        "naive": 6.35
       },
       {
         "date": "2023-11-01",
-        "actual": 21.88,
-        "nowcast": 22.68,
-        "rem": 21.82,
-        "naive": 15.64
+        "actual": 12.81,
+        "nowcast": 8.4,
+        "rem": 12.0,
+        "naive": 4.92
       },
       {
         "date": "2023-12-01",
-        "actual": 35.03,
-        "nowcast": 23.19,
-        "rem": 33.91,
-        "naive": 15.66
+        "actual": 25.47,
+        "nowcast": 26.91,
+        "rem": 27.0,
+        "naive": 5.12
       },
       {
         "date": "2024-01-01",
-        "actual": 21.98,
-        "nowcast": 22.87,
-        "rem": 21.45,
-        "naive": 16.44
+        "actual": 20.61,
+        "nowcast": 23.29,
+        "rem": 21.92,
+        "naive": 6.03
       },
       {
         "date": "2024-02-01",
-        "actual": 21.25,
-        "nowcast": 21.44,
-        "rem": 21.35,
-        "naive": 17.44
+        "actual": 13.24,
+        "nowcast": 15.29,
+        "rem": 15.77,
+        "naive": 6.63
       },
       {
         "date": "2024-03-01",
-        "actual": 20.85,
-        "nowcast": 20.93,
-        "rem": 21.1,
-        "naive": 18.81
+        "actual": 11.01,
+        "nowcast": 11.35,
+        "rem": 12.5,
+        "naive": 7.68
       },
       {
         "date": "2024-04-01",
-        "actual": 21.14,
-        "nowcast": 21.24,
-        "rem": 21.43,
-        "naive": 19.37
+        "actual": 8.83,
+        "nowcast": 8.17,
+        "rem": 9.0,
+        "naive": 8.4
       },
       {
         "date": "2024-05-01",
-        "actual": 20.39,
-        "nowcast": 19.94,
-        "rem": 19.46,
-        "naive": 19.84
+        "actual": 4.18,
+        "nowcast": 5.04,
+        "rem": 5.19,
+        "naive": 7.77
       },
       {
         "date": "2024-06-01",
-        "actual": 19.28,
-        "nowcast": 19.94,
-        "rem": 19.87,
-        "naive": 20.11
+        "actual": 4.58,
+        "nowcast": 4.26,
+        "rem": 5.2,
+        "naive": 5.95
       },
       {
         "date": "2024-07-01",
-        "actual": 17.45,
-        "nowcast": 17.44,
-        "rem": 16.89,
-        "naive": 21.28
+        "actual": 4.03,
+        "nowcast": 3.83,
+        "rem": 3.9,
+        "naive": 6.34
       },
       {
         "date": "2024-08-01",
-        "actual": 16.89,
-        "nowcast": 17.62,
-        "rem": 17.33,
-        "naive": 19.91
+        "actual": 4.17,
+        "nowcast": 3.26,
+        "rem": 3.88,
+        "naive": 12.44
       },
       {
         "date": "2024-09-01",
-        "actual": 15.83,
-        "nowcast": 15.58,
-        "rem": 15.82,
-        "naive": 20.1
+        "actual": 3.47,
+        "nowcast": 3.9,
+        "rem": 3.52,
+        "naive": 12.75
       },
       {
         "date": "2024-10-01",
-        "actual": 15.08,
-        "nowcast": 14.17,
-        "rem": 14.12,
-        "naive": 20.36
+        "actual": 2.69,
+        "nowcast": 3.09,
+        "rem": 3.0,
+        "naive": 8.3
       },
       {
         "date": "2024-11-01",
-        "actual": 14.88,
-        "nowcast": 14.67,
-        "rem": 14.66,
-        "naive": 21.88
+        "actual": 2.43,
+        "nowcast": 2.52,
+        "rem": 2.8,
+        "naive": 12.81
       },
       {
         "date": "2024-12-01",
-        "actual": 14.08,
-        "nowcast": 14.18,
-        "rem": 14.34,
-        "naive": 35.03
+        "actual": 2.7,
+        "nowcast": 1.38,
+        "rem": 2.7,
+        "naive": 25.47
       },
       {
         "date": "2025-01-01",
-        "actual": 14.06,
-        "nowcast": 13.42,
-        "rem": 14.49,
-        "naive": 21.98
+        "actual": 2.21,
+        "nowcast": 1.71,
+        "rem": 2.3,
+        "naive": 20.61
       },
       {
         "date": "2025-02-01",
-        "actual": 13.39,
-        "nowcast": 12.94,
-        "rem": 13.29,
-        "naive": 21.25
+        "actual": 2.4,
+        "nowcast": 2.27,
+        "rem": 2.3,
+        "naive": 13.24
       },
       {
         "date": "2025-03-01",
-        "actual": 13.12,
-        "nowcast": 12.57,
-        "rem": 14.19,
-        "naive": 20.85
+        "actual": 3.73,
+        "nowcast": 3.22,
+        "rem": 2.55,
+        "naive": 11.01
       },
       {
         "date": "2025-04-01",
-        "actual": 12.73,
-        "nowcast": 12.41,
-        "rem": 13.43,
-        "naive": 21.14
+        "actual": 2.78,
+        "nowcast": 3.79,
+        "rem": 3.16,
+        "naive": 8.83
       },
       {
         "date": "2025-05-01",
-        "actual": 10.67,
-        "nowcast": 10.24,
-        "rem": 10.49,
-        "naive": 20.39
+        "actual": 1.5,
+        "nowcast": 1.94,
+        "rem": 2.09,
+        "naive": 4.18
       },
       {
         "date": "2025-06-01",
-        "actual": 10.36,
-        "nowcast": 10.64,
-        "rem": 10.88,
-        "naive": 19.28
+        "actual": 1.62,
+        "nowcast": 2.11,
+        "rem": 1.8,
+        "naive": 4.58
       },
       {
         "date": "2025-07-01",
-        "actual": 9.17,
-        "nowcast": 9.66,
-        "rem": 10.52,
-        "naive": 17.45
+        "actual": 1.9,
+        "nowcast": 2.71,
+        "rem": 1.8,
+        "naive": 4.03
       },
       {
         "date": "2025-08-01",
-        "actual": 7.97,
-        "nowcast": 9.03,
-        "rem": 9.34,
-        "naive": 16.89
+        "actual": 1.88,
+        "nowcast": 2.98,
+        "rem": 2.1,
+        "naive": 4.17
       },
       {
         "date": "2025-09-01",
-        "actual": 7.19,
-        "nowcast": 7.01,
-        "rem": 6.33,
-        "naive": 15.83
+        "actual": 2.08,
+        "nowcast": 3.53,
+        "rem": 2.1,
+        "naive": 3.47
       },
       {
         "date": "2025-10-01",
-        "actual": 7.45,
-        "nowcast": 7.17,
-        "rem": 6.8,
-        "naive": 15.08
+        "actual": 2.34,
+        "nowcast": 2.76,
+        "rem": 2.24,
+        "naive": 2.69
       },
       {
         "date": "2025-11-01",
-        "actual": 5.44,
-        "nowcast": 6.24,
-        "rem": 6.48,
-        "naive": 14.88
+        "actual": 2.47,
+        "nowcast": 2.81,
+        "rem": 2.3,
+        "naive": 2.43
       },
       {
         "date": "2025-12-01",
-        "actual": 6.13,
-        "nowcast": 5.99,
-        "rem": 5.39,
-        "naive": 14.08
+        "actual": 2.85,
+        "nowcast": 3.22,
+        "rem": 2.3,
+        "naive": 2.7
       },
       {
         "date": "2026-01-01",
-        "actual": 4.24,
-        "nowcast": 3.99,
-        "rem": 3.31,
-        "naive": 14.06
+        "actual": 2.88,
+        "nowcast": 2.65,
+        "rem": null,
+        "naive": 2.21
       },
       {
         "date": "2026-02-01",
-        "actual": 4.75,
-        "nowcast": 4.3,
-        "rem": 4.41,
-        "naive": 13.39
+        "actual": 2.9,
+        "nowcast": 2.62,
+        "rem": null,
+        "naive": 2.4
       },
       {
         "date": "2026-03-01",
-        "actual": 4.64,
-        "nowcast": 4.2,
-        "rem": 4.93,
-        "naive": 13.12
+        "actual": 3.38,
+        "nowcast": 3.47,
+        "rem": null,
+        "naive": 3.73
       },
       {
         "date": "2026-04-01",
-        "actual": 4.3,
-        "nowcast": 3.44,
-        "rem": 4.23,
-        "naive": 12.73
+        "actual": 2.58,
+        "nowcast": 2.9,
+        "rem": null,
+        "naive": 2.78
       },
       {
         "date": "2026-05-01",
-        "actual": 3.57,
-        "nowcast": 3.13,
-        "rem": 3.11,
-        "naive": 10.67
+        "actual": 2.15,
+        "nowcast": 1.99,
+        "rem": null,
+        "naive": 1.5
       }
     ],
     "metrics": {
       "nowcast": {
-        "mae": 0.778,
-        "rmse": 1.951
+        "mae": 0.84,
+        "rmse": 1.158
       },
       "rem": {
-        "mae": 0.614,
-        "rmse": 0.746
+        "mae": 0.513,
+        "rmse": 0.696
       },
       "naive": {
-        "mae": 7.198,
-        "rmse": 8.115
+        "mae": 3.004,
+        "rmse": 5.187
       }
     }
   },
-  "generated_at": "2026-06-15 18:55 UTC",
-  "is_sample": true
+  "generated_at": "2026-06-15 19:17 UTC",
+  "is_sample": false
 }

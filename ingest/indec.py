@@ -1,142 +1,113 @@
-"""INDEC IPC ingestion — the target series and its decomposition.
+"""INDEC IPC ingestion — real data via the datos.gob.ar Series API.
 
-Produces a monthly DataFrame of month-over-month percent changes for the
-aggregate components (nivel general, núcleo, estacional, regulados) and for the
-thematic areas defined in :data:`config.AREAS`.
+Fetches the official national IPC index series (base dic-2016) for the four
+aggregate components and the COICOP divisions mapped to our thematic areas, then
+converts indices to month-over-month percent changes — the canonical frame the
+modeling layer consumes.
 
-Primary source is the INDEC "cuadros" Excel; the datos.gob.ar CSV mirror is a
-fallback. Both formats shift occasionally, so callers should treat a raised
-``INDECError`` as "use the cached/sample history instead".
+Source: https://apis.datos.gob.ar/series/api (Series de Tiempo, SSPM / INDEC).
+Series IDs verified June 2026 against the live catalog.
 """
 
 from __future__ import annotations
-
-import io
 
 import pandas as pd
 import requests
 
 import config
 
+SERIES_API: str = "https://apis.datos.gob.ar/series/api/series/"
+
+# Aggregate components — national monthly index, base dic-2016.
+COMPONENT_SERIES: dict[str, str] = {
+    "nivel_general": "148.3_INIVELNAL_DICI_M_26",
+    "nucleo": "148.3_INUCLEONAL_DICI_M_19",
+    "estacional": "148.3_IESTACINAL_DICI_M_25",
+    "regulados": "148.3_IREGULANAL_DICI_M_22",
+}
+
+# COICOP divisions (national monthly index) mapped to our thematic areas.
+AREA_SERIES: dict[str, str] = {
+    "alimentos": "146.3_IALIMENNAL_DICI_M_45",      # Alimentos y bebidas no alcohólicas
+    "energia_vivienda": "146.3_IVIVIENNAL_DICI_M_52",  # Vivienda, agua, electricidad, comb.
+    "transporte": "146.3_ITRANSPNAL_DICI_M_23",
+    "indumentaria": "146.3_IPRENDANAL_DICI_M_35",   # Prendas de vestir y calzado
+    "salud": "146.3_ISALUDNAL_DICI_M_18",
+    "educacion": "146.3_IEDUCACNAL_DICI_M_22",
+    "equipamiento": "146.3_IEQUIPANAL_DICI_M_46",   # Equipamiento y mant. del hogar
+    "comunicacion": "146.3_ICOMUNINAL_DICI_M_27",
+    "recreacion": "146.3_IRECREANAL_DICI_M_31",
+    "restaurantes": "146.3_IRESTAUNAL_DICI_M_33",   # Hoteles y restaurantes
+    "otros": "146.3_IBIENESNAL_DICI_M_36",          # Bienes y servicios varios
+}
+
 
 class INDECError(RuntimeError):
     """Raised when IPC data cannot be retrieved or parsed."""
 
 
-def _download(url: str) -> bytes:
-    """GET a URL and return its raw bytes.
+def _fetch_series(id_map: dict[str, str]) -> pd.DataFrame:
+    """Fetch a group of index series and return them aligned by month.
 
     Args:
-        url: Absolute URL to download.
+        id_map: Mapping of output column name → datos.gob.ar series id.
 
     Returns:
-        The response body as bytes.
+        A DataFrame indexed by month with one float index-level column per key.
 
     Raises:
-        INDECError: On any network error or non-2xx status.
+        INDECError: On network failure or an unexpected response.
     """
+    names = list(id_map.keys())
+    ids = ",".join(id_map[n] for n in names)
     try:
         resp = requests.get(
-            url,
+            SERIES_API,
+            params={"ids": ids, "format": "json", "limit": 1000, "collapse": "month"},
             headers=config.REQUEST_HEADERS,
             timeout=config.REQUEST_TIMEOUT_SECONDS,
         )
         resp.raise_for_status()
-        return resp.content
-    except requests.RequestException as exc:
-        raise INDECError(f"Download failed for {url}: {exc}") from exc
+        payload = resp.json()
+    except (requests.RequestException, ValueError) as exc:
+        raise INDECError(f"datos.gob.ar Series API request failed: {exc}") from exc
+
+    data = payload.get("data")
+    if not data:
+        raise INDECError("Series API returned no data.")
+
+    # Response rows are [date, v0, v1, ...] in the order of the requested ids.
+    df = pd.DataFrame(data, columns=["date", *names])
+    df["date"] = pd.to_datetime(df["date"])
+    df = df.set_index("date").astype(float)
+    return df
 
 
 def fetch_history() -> pd.DataFrame:
-    """Fetch and normalize the monthly IPC history.
-
-    Attempts the INDEC Excel first, then the datos.gob.ar CSV mirror. The return
-    shape is the canonical frame consumed by the modeling layer.
+    """Fetch the official IPC history and convert it to monthly MoM percent.
 
     Returns:
-        A DataFrame with a ``date`` column (month start) plus MoM-percent columns
-        for each component in :data:`config.COMPONENTS` and each area in
-        :data:`config.AREAS`.
+        A DataFrame with a ``date`` column (month start) and MoM-percent columns
+        for each component in :data:`COMPONENT_SERIES` and area in
+        :data:`AREA_SERIES`.
 
     Raises:
-        INDECError: If neither source yields a usable series.
+        INDECError: If the data cannot be retrieved.
     """
-    try:
-        return _parse_indec_excel(_download(config.INDEC_IPC_XLS_URL))
-    except INDECError:
-        # Fallback: at minimum recover nivel_general from the datos.gob.ar mirror.
-        return _parse_datos_gob_csv(_download(config.DATOS_GOB_IPC_CSV_URL))
+    components = _fetch_series(COMPONENT_SERIES)
+    areas = _fetch_series(AREA_SERIES)
+    index_levels = components.join(areas, how="outer").sort_index()
 
-
-def _parse_indec_excel(content: bytes) -> pd.DataFrame:
-    """Parse the INDEC IPC "aperturas" Excel workbook.
-
-    The workbook layout (sheet names, header rows) is confirmed at runtime; this
-    parser targets the national index/variation tables. Raises on mismatch so the
-    caller can fall back.
-
-    Args:
-        content: Raw ``.xls``/``.xlsx`` bytes.
-
-    Returns:
-        The canonical monthly MoM DataFrame.
-
-    Raises:
-        INDECError: If the expected tables are not found.
-    """
-    try:
-        book = pd.read_excel(io.BytesIO(content), sheet_name=None, header=None)
-    except Exception as exc:  # noqa: BLE001 - surface any parse failure uniformly
-        raise INDECError(f"Could not open INDEC Excel: {exc}") from exc
-    # The exact sheet/row geometry must be confirmed against the live file. Until
-    # mapped, signal a fallback so the pipeline uses the cached/sample history.
-    raise INDECError(
-        "INDEC Excel geometry not yet mapped at runtime; using fallback. "
-        f"(workbook had {len(book)} sheets)"
-    )
-
-
-def _parse_datos_gob_csv(content: bytes) -> pd.DataFrame:
-    """Parse the datos.gob.ar nivel-general IPC CSV mirror (fallback).
-
-    This recovers only the headline index; component/area columns are filled with
-    NaN so the modeling layer can still run on whatever is available.
-
-    Args:
-        content: Raw CSV bytes.
-
-    Returns:
-        A canonical frame with ``nivel_general`` populated.
-
-    Raises:
-        INDECError: If the CSV cannot be parsed into a dated index series.
-    """
-    try:
-        raw = pd.read_csv(io.BytesIO(content))
-    except Exception as exc:  # noqa: BLE001
-        raise INDECError(f"Could not parse datos.gob.ar CSV: {exc}") from exc
-
-    date_col = raw.columns[0]
-    value_col = raw.columns[-1]
-    try:
-        raw[date_col] = pd.to_datetime(raw[date_col])
-    except Exception as exc:  # noqa: BLE001
-        raise INDECError(f"Unexpected date column in CSV: {exc}") from exc
-
-    index_series = (
-        raw.set_index(date_col)[value_col].resample("MS").last().astype(float)
-    )
-    mom = index_series.pct_change() * 100
-
-    out = pd.DataFrame({"date": mom.index, "nivel_general": mom.values})
-    for col in [c for c in config.COMPONENTS if c != "nivel_general"] + list(config.AREAS):
-        out[col] = pd.NA
-    return out.dropna(subset=["nivel_general"]).reset_index(drop=True)
+    # Index → month-over-month percent change.
+    mom = index_levels.pct_change() * 100.0
+    mom = mom.dropna(how="all").reset_index()
+    mom = mom[mom["date"] >= "2017-01-01"].copy()
+    num_cols = mom.columns.drop("date")
+    mom[num_cols] = mom[num_cols].round(2)
+    return mom.reset_index(drop=True)
 
 
 if __name__ == "__main__":  # Smoke test
-    try:
-        frame = fetch_history()
-        print(frame.tail())
-    except INDECError as err:
-        print(f"INDEC fetch failed (expected without runtime mapping): {err}")
+    frame = fetch_history()
+    cols = ["date", "nivel_general", "nucleo", "alimentos"]
+    print(frame[cols].tail(6).to_string(index=False))

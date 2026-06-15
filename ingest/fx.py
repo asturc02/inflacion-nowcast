@@ -40,11 +40,11 @@ def fetch_history() -> pd.DataFrame:
 
     try:
         raw = pd.read_csv(io.StringIO(resp.text))
-        # Columns: day, source, value_sell, value_buy
+        # Columns: day, type (Oficial/Blue), value_buy, value_sell
         raw = raw.rename(columns={"day": "date"})
         raw["date"] = pd.to_datetime(raw["date"])
         wide = (
-            raw.pivot_table(index="date", columns="source", values="value_sell")
+            raw.pivot_table(index="date", columns="type", values="value_sell")
             .rename(columns={"Oficial": "oficial", "Blue": "blue"})
             .reset_index()
             .sort_values("date")
