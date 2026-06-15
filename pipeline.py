@@ -44,7 +44,12 @@ def _synthesize() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFram
         to nowcast.
     """
     rng = np.random.default_rng(42)
-    months = pd.date_range("2021-01-01", "2026-06-01", freq="MS")
+    # Nowcast timing: INDEC publishes month M around mid-month M+1, so the last
+    # *official* month is the previous calendar month and the nowcast target is
+    # the current (in-progress) month. History therefore ends at last_official.
+    current_month = pd.Timestamp.now().normalize().to_period("M").to_timestamp()
+    last_official = (current_month.to_period("M") - 1).to_timestamp()
+    months = pd.date_range("2021-01-01", last_official, freq="MS")
     n = len(months)
     t = np.arange(n)
     month_num = months.month.to_numpy()  # plain ndarray (avoids immutable Index)

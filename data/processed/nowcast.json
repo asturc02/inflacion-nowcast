@@ -1,337 +1,330 @@
 {
-  "target_month": "2026-07-01",
-  "target_month_label": "julio 2026",
-  "headline": 2.29,
-  "core": 1.81,
-  "band_low": -0.44,
-  "band_high": 5.02,
-  "last_official": 2.68,
+  "target_month": "2026-06-01",
+  "target_month_label": "junio 2026",
+  "headline": 2.07,
+  "core": 1.83,
+  "band_low": 0.12,
+  "band_high": 4.02,
+  "last_official": 3.57,
   "rem_headline": 2.3,
   "areas": {
-    "alimentos": 6.45,
-    "energia_vivienda": 6.53,
-    "transporte": 6.85,
-    "indumentaria": 4.75,
-    "salud": 5.15,
-    "educacion": 4.27,
-    "equipamiento": 5.45,
-    "comunicacion": 4.04,
-    "recreacion": 4.18,
-    "restaurantes": 4.6,
-    "otros": 5.74
+    "alimentos": 7.4,
+    "energia_vivienda": 8.72,
+    "transporte": 7.7,
+    "indumentaria": 5.83,
+    "salud": 6.0,
+    "educacion": 4.0,
+    "equipamiento": 6.18,
+    "comunicacion": 4.31,
+    "recreacion": 6.8,
+    "restaurantes": 7.14,
+    "otros": 6.48
   },
   "backtest": {
     "series": [
       {
         "date": "2023-01-01",
         "actual": 16.44,
-        "nowcast": 15.41,
-        "rem": 17.04,
+        "nowcast": 15.76,
+        "rem": 15.75,
         "naive": 10.14
       },
       {
         "date": "2023-02-01",
         "actual": 17.44,
-        "nowcast": 16.5,
-        "rem": 16.88,
+        "nowcast": 17.61,
+        "rem": 16.84,
         "naive": 11.73
       },
       {
         "date": "2023-03-01",
         "actual": 18.81,
-        "nowcast": 19.5,
-        "rem": 19.26,
+        "nowcast": 20.41,
+        "rem": 20.53,
         "naive": 12.17
       },
       {
         "date": "2023-04-01",
         "actual": 19.37,
-        "nowcast": 19.42,
-        "rem": 19.36,
+        "nowcast": 19.75,
+        "rem": 20.63,
         "naive": 12.03
       },
       {
         "date": "2023-05-01",
         "actual": 19.84,
-        "nowcast": 18.66,
-        "rem": 18.88,
+        "nowcast": 19.34,
+        "rem": 19.55,
         "naive": 13.21
       },
       {
         "date": "2023-06-01",
         "actual": 20.11,
-        "nowcast": 20.29,
-        "rem": 19.89,
+        "nowcast": 18.38,
+        "rem": 19.85,
         "naive": 12.67
       },
       {
         "date": "2023-07-01",
         "actual": 21.28,
-        "nowcast": 21.65,
-        "rem": 21.54,
+        "nowcast": 20.38,
+        "rem": 20.48,
         "naive": 13.93
       },
       {
         "date": "2023-08-01",
         "actual": 19.91,
-        "nowcast": 19.97,
-        "rem": 20.34,
+        "nowcast": 19.48,
+        "rem": 18.57,
         "naive": 13.52
       },
       {
         "date": "2023-09-01",
         "actual": 20.1,
-        "nowcast": 19.98,
-        "rem": 20.0,
+        "nowcast": 20.01,
+        "rem": 20.02,
         "naive": 13.7
       },
       {
         "date": "2023-10-01",
         "actual": 20.36,
-        "nowcast": 20.44,
-        "rem": 21.43,
+        "nowcast": 20.24,
+        "rem": 19.66,
         "naive": 13.84
       },
       {
         "date": "2023-11-01",
         "actual": 21.88,
-        "nowcast": 21.15,
-        "rem": 22.58,
+        "nowcast": 22.68,
+        "rem": 21.82,
         "naive": 15.64
       },
       {
         "date": "2023-12-01",
         "actual": 35.03,
-        "nowcast": 52.09,
-        "rem": 34.85,
+        "nowcast": 23.19,
+        "rem": 33.91,
         "naive": 15.66
       },
       {
         "date": "2024-01-01",
         "actual": 21.98,
-        "nowcast": 21.9,
-        "rem": 22.51,
+        "nowcast": 22.87,
+        "rem": 21.45,
         "naive": 16.44
       },
       {
         "date": "2024-02-01",
         "actual": 21.25,
-        "nowcast": 22.1,
-        "rem": 22.6,
+        "nowcast": 21.44,
+        "rem": 21.35,
         "naive": 17.44
       },
       {
         "date": "2024-03-01",
         "actual": 20.85,
-        "nowcast": 20.26,
-        "rem": 22.22,
+        "nowcast": 20.93,
+        "rem": 21.1,
         "naive": 18.81
       },
       {
         "date": "2024-04-01",
         "actual": 21.14,
-        "nowcast": 20.23,
-        "rem": 20.28,
+        "nowcast": 21.24,
+        "rem": 21.43,
         "naive": 19.37
       },
       {
         "date": "2024-05-01",
         "actual": 20.39,
-        "nowcast": 19.57,
-        "rem": 19.74,
+        "nowcast": 19.94,
+        "rem": 19.46,
         "naive": 19.84
       },
       {
         "date": "2024-06-01",
         "actual": 19.28,
-        "nowcast": 19.37,
-        "rem": 20.32,
+        "nowcast": 19.94,
+        "rem": 19.87,
         "naive": 20.11
       },
       {
         "date": "2024-07-01",
         "actual": 17.45,
-        "nowcast": 17.37,
-        "rem": 16.71,
+        "nowcast": 17.44,
+        "rem": 16.89,
         "naive": 21.28
       },
       {
         "date": "2024-08-01",
         "actual": 16.89,
-        "nowcast": 15.43,
-        "rem": 15.96,
+        "nowcast": 17.62,
+        "rem": 17.33,
         "naive": 19.91
       },
       {
         "date": "2024-09-01",
         "actual": 15.83,
-        "nowcast": 15.28,
-        "rem": 15.49,
+        "nowcast": 15.58,
+        "rem": 15.82,
         "naive": 20.1
       },
       {
         "date": "2024-10-01",
         "actual": 15.08,
-        "nowcast": 14.09,
-        "rem": 15.38,
+        "nowcast": 14.17,
+        "rem": 14.12,
         "naive": 20.36
       },
       {
         "date": "2024-11-01",
         "actual": 14.88,
-        "nowcast": 13.56,
-        "rem": 14.81,
+        "nowcast": 14.67,
+        "rem": 14.66,
         "naive": 21.88
       },
       {
         "date": "2024-12-01",
         "actual": 14.08,
-        "nowcast": 13.26,
-        "rem": 13.63,
+        "nowcast": 14.18,
+        "rem": 14.34,
         "naive": 35.03
       },
       {
         "date": "2025-01-01",
         "actual": 14.06,
-        "nowcast": 13.59,
-        "rem": 13.59,
+        "nowcast": 13.42,
+        "rem": 14.49,
         "naive": 21.98
       },
       {
         "date": "2025-02-01",
         "actual": 13.39,
-        "nowcast": 13.66,
-        "rem": 12.89,
+        "nowcast": 12.94,
+        "rem": 13.29,
         "naive": 21.25
       },
       {
         "date": "2025-03-01",
         "actual": 13.12,
-        "nowcast": 12.76,
-        "rem": 12.5,
+        "nowcast": 12.57,
+        "rem": 14.19,
         "naive": 20.85
       },
       {
         "date": "2025-04-01",
         "actual": 12.73,
-        "nowcast": 14.07,
-        "rem": 14.33,
+        "nowcast": 12.41,
+        "rem": 13.43,
         "naive": 21.14
       },
       {
         "date": "2025-05-01",
         "actual": 10.67,
-        "nowcast": 11.23,
-        "rem": 10.88,
+        "nowcast": 10.24,
+        "rem": 10.49,
         "naive": 20.39
       },
       {
         "date": "2025-06-01",
         "actual": 10.36,
-        "nowcast": 10.46,
-        "rem": 10.98,
+        "nowcast": 10.64,
+        "rem": 10.88,
         "naive": 19.28
       },
       {
         "date": "2025-07-01",
         "actual": 9.17,
-        "nowcast": 9.44,
-        "rem": 8.83,
+        "nowcast": 9.66,
+        "rem": 10.52,
         "naive": 17.45
       },
       {
         "date": "2025-08-01",
         "actual": 7.97,
-        "nowcast": 8.23,
-        "rem": 7.84,
+        "nowcast": 9.03,
+        "rem": 9.34,
         "naive": 16.89
       },
       {
         "date": "2025-09-01",
         "actual": 7.19,
-        "nowcast": 6.5,
-        "rem": 6.69,
+        "nowcast": 7.01,
+        "rem": 6.33,
         "naive": 15.83
       },
       {
         "date": "2025-10-01",
         "actual": 7.45,
-        "nowcast": 6.2,
-        "rem": 5.59,
+        "nowcast": 7.17,
+        "rem": 6.8,
         "naive": 15.08
       },
       {
         "date": "2025-11-01",
         "actual": 5.44,
-        "nowcast": 4.81,
-        "rem": 4.47,
+        "nowcast": 6.24,
+        "rem": 6.48,
         "naive": 14.88
       },
       {
         "date": "2025-12-01",
         "actual": 6.13,
-        "nowcast": 5.75,
-        "rem": 4.86,
+        "nowcast": 5.99,
+        "rem": 5.39,
         "naive": 14.08
       },
       {
         "date": "2026-01-01",
         "actual": 4.24,
-        "nowcast": 3.67,
-        "rem": 2.67,
+        "nowcast": 3.99,
+        "rem": 3.31,
         "naive": 14.06
       },
       {
         "date": "2026-02-01",
         "actual": 4.75,
-        "nowcast": 4.71,
-        "rem": 3.91,
+        "nowcast": 4.3,
+        "rem": 4.41,
         "naive": 13.39
       },
       {
         "date": "2026-03-01",
         "actual": 4.64,
-        "nowcast": 6.09,
-        "rem": 5.57,
+        "nowcast": 4.2,
+        "rem": 4.93,
         "naive": 13.12
       },
       {
         "date": "2026-04-01",
         "actual": 4.3,
-        "nowcast": 4.05,
-        "rem": 4.27,
+        "nowcast": 3.44,
+        "rem": 4.23,
         "naive": 12.73
       },
       {
         "date": "2026-05-01",
         "actual": 3.57,
-        "nowcast": 4.32,
-        "rem": 4.47,
+        "nowcast": 3.13,
+        "rem": 3.11,
         "naive": 10.67
-      },
-      {
-        "date": "2026-06-01",
-        "actual": 2.68,
-        "nowcast": 2.24,
-        "rem": 2.96,
-        "naive": 10.36
       }
     ],
     "metrics": {
       "nowcast": {
-        "mae": 0.979,
-        "rmse": 2.728
+        "mae": 0.778,
+        "rmse": 1.951
       },
       "rem": {
-        "mae": 0.662,
-        "rmse": 0.802
+        "mae": 0.614,
+        "rmse": 0.746
       },
       "naive": {
-        "mae": 7.209,
-        "rmse": 8.105
+        "mae": 7.198,
+        "rmse": 8.115
       }
     }
   },
-  "generated_at": "2026-06-15 17:13 UTC",
+  "generated_at": "2026-06-15 18:55 UTC",
   "is_sample": true
 }
