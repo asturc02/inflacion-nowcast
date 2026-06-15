@@ -26,19 +26,119 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+# --- "Apple Crypto" design system -------------------------------------------
+# iOS Stocks meets a DeFi portfolio tracker: frosted glass on a true-black
+# lock-screen base, Apple system colors, SF Pro typography with tabular figures.
+# Defined here in the UI layer so the look is fully owned by app.py — config.py's
+# COLORS palette is intentionally left untouched.
+FONT_STACK = (
+    '-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", '
+    '"Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif'
+)
+PALETTE: dict[str, str] = {
+    # Surfaces
+    "bg": "#000000",                      # OLED black, iOS Stocks base
+    "surface": "rgba(28,28,30,0.72)",     # frosted systemGray6 (translucent)
+    "surface_solid": "#1C1C1E",           # opaque fallback
+    "border": "rgba(255,255,255,0.08)",   # hairline separator
+    # Text (Apple label hierarchy)
+    "headline": "#F5F5F7",                # primary label
+    "muted": "rgba(235,235,245,0.60)",    # secondary label
+    "faint": "rgba(235,235,245,0.30)",    # tertiary label
+    # Brand accent — Apple system blue (dark variant)
+    "accent": "#0A84FF",
+    "accent_hi": "#409CFF",
+    # Data series — Apple system colors (dark variants)
+    "nucleo": "#64D2FF",                  # teal
+    "estacional": "#FF9F0A",              # orange
+    "regulados": "#FF453A",               # red
+    "rem": "#BF5AF2",                     # purple
+    # Chart chrome
+    "grid": "rgba(255,255,255,0.06)",
+}
+PLOTLY_FONT = 'Inter, -apple-system, "Segoe UI", sans-serif'
+
 CUSTOM_CSS = f"""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600&display=swap');
-.stApp {{ background-color: {config.COLORS['bg']}; color: {config.COLORS['headline']}; }}
-section[data-testid="stSidebar"] {{ background-color: {config.COLORS['surface']}; border-right: 1px solid {config.COLORS['border']}; }}
-h1, h2, h3, label, p, span {{ font-family: 'Inter', sans-serif; }}
-[data-testid="stMetricValue"] {{ font-family: 'JetBrains Mono', monospace !important; }}
-.surface-card {{ background-color: {config.COLORS['surface']}; border: 1px solid {config.COLORS['border']}; border-radius: 4px; padding: 1.1rem 1.4rem; margin-bottom: 1rem; }}
-.big-num {{ font-family: 'JetBrains Mono', monospace; font-size: 3rem; font-weight: 700; color: {config.COLORS['accent']}; line-height: 1.1; }}
-.muted {{ color: #A3A3A3; font-family: 'JetBrains Mono', monospace; }}
-.brand {{ color: {config.COLORS['accent']}; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }}
-.stButton > button {{ background-color: {config.COLORS['surface']}; color: {config.COLORS['accent']}; border: 1px solid {config.COLORS['accent']}; border-radius: 4px; font-family: 'JetBrains Mono', monospace; }}
-.stButton > button:hover {{ background-color: {config.COLORS['accent']}; color: {config.COLORS['bg']}; }}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Lock-screen depth: near-black with faint blue/purple glows so the frosted
+   cards have something real to blur behind them. */
+.stApp {{
+  background-color: {PALETTE['bg']};
+  background-image:
+    radial-gradient(900px 620px at 10% -10%, rgba(10,132,255,0.12), transparent 60%),
+    radial-gradient(820px 600px at 100% 0%, rgba(191,90,242,0.09), transparent 55%);
+  background-attachment: fixed;
+  color: {PALETTE['headline']};
+  font-family: {FONT_STACK};
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}}
+html, body, h1, h2, h3, h4, label, p, span, div, button, input {{ font-family: {FONT_STACK}; }}
+
+/* Tabular figures — Apple aligns numbers with SF's tnum, never a mono font. */
+[data-testid="stMetricValue"], .big-num, .muted, [data-testid="stTable"], .stDataFrame {{
+  font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1, "cv01" 1;
+}}
+
+h1 {{ letter-spacing: -0.022em; font-weight: 700; }}
+h2, h3 {{ letter-spacing: -0.012em; font-weight: 600; }}
+
+section[data-testid="stSidebar"] {{
+  background: rgba(20,20,22,0.55);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border-right: 1px solid {PALETTE['border']};
+}}
+
+/* Frosted glass surface — the signature iOS / Control Center material. */
+.surface-card {{
+  background: {PALETTE['surface']};
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  border: 1px solid {PALETTE['border']};
+  border-radius: 20px;
+  padding: 1.35rem 1.6rem;
+  margin-bottom: 1rem;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 10px 30px rgba(0,0,0,0.35);
+}}
+
+.big-num {{
+  font-size: 3.4rem; font-weight: 700; letter-spacing: -0.03em; line-height: 1.04;
+  color: {PALETTE['accent']};
+}}
+.muted {{ color: {PALETTE['muted']}; font-size: 0.92rem; }}
+.brand {{ color: {PALETTE['faint']}; font-size: 0.78rem; letter-spacing: 0.005em; }}
+
+/* Metrics: secondary-label caption, tight tabular value. */
+[data-testid="stMetricLabel"] p {{ color: {PALETTE['muted']} !important; font-weight: 500; }}
+[data-testid="stMetricValue"] {{ font-weight: 600; letter-spacing: -0.02em; color: {PALETTE['headline']}; }}
+
+/* iOS filled button (primary actions). */
+.stButton > button {{
+  background: {PALETTE['accent']}; color: #FFFFFF; border: 0;
+  border-radius: 12px; font-weight: 600; letter-spacing: -0.01em;
+  padding: 0.55rem 1.05rem;
+  box-shadow: 0 4px 14px rgba(10,132,255,0.32);
+  transition: transform .16s ease, background .16s ease, box-shadow .16s ease;
+}}
+.stButton > button:hover {{ background: {PALETTE['accent_hi']}; transform: translateY(-1px); box-shadow: 0 7px 20px rgba(10,132,255,0.42); }}
+.stButton > button:active {{ transform: translateY(0); box-shadow: 0 3px 10px rgba(10,132,255,0.30); }}
+
+/* iOS tinted button (download / secondary actions). */
+.stDownloadButton > button {{
+  background: rgba(10,132,255,0.15); color: {PALETTE['accent']};
+  border: 1px solid rgba(10,132,255,0.30); border-radius: 12px; font-weight: 600;
+  transition: background .16s ease;
+}}
+.stDownloadButton > button:hover {{ background: rgba(10,132,255,0.26); border-color: rgba(10,132,255,0.45); }}
+
+/* Rounded, frosted-feeling alerts, inputs, and dataframe. */
+[data-testid="stAlert"] {{ border-radius: 14px; border: 1px solid {PALETTE['border']}; }}
+.stDataFrame {{ border-radius: 14px; overflow: hidden; }}
+hr, [data-testid="stDivider"] {{ border-color: {PALETTE['border']} !important; }}
+.stSlider [data-baseweb="slider"] div[role="slider"] {{ background: {PALETTE['accent']}; }}
 </style>
 """
 st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
@@ -117,8 +217,8 @@ def render_decomposition(history: pd.DataFrame) -> None:
     st.subheader("Descomposición: general · núcleo · estacional · regulados")
     fig = go.Figure()
     palette = {
-        "nivel_general": config.COLORS["headline"], "nucleo": config.COLORS["nucleo"],
-        "estacional": config.COLORS["estacional"], "regulados": config.COLORS["regulados"],
+        "nivel_general": PALETTE["headline"], "nucleo": PALETTE["nucleo"],
+        "estacional": PALETTE["estacional"], "regulados": PALETTE["regulados"],
     }
     labels = {"nivel_general": "Nivel general", "nucleo": "Núcleo",
               "estacional": "Estacional", "regulados": "Regulados"}
@@ -129,7 +229,7 @@ def render_decomposition(history: pd.DataFrame) -> None:
                 mode="lines", line=dict(color=color, width=2),
             ))
     _style_fig(fig, yaxis_title="Variación mensual (%)")
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
 
 
 def render_areas(nowcast: dict[str, Any]) -> None:
@@ -148,12 +248,12 @@ def render_areas(nowcast: dict[str, Any]) -> None:
         x=[v for _, v in items],
         y=[config.AREAS.get(a, a) for a, _ in items],
         orientation="h",
-        marker_color=config.COLORS["accent"],
+        marker=dict(color=PALETTE["accent"], cornerradius=7, line=dict(width=0)),
         hovertemplate="%{y}: %{x:.1f}%<extra></extra>",
     ))
     _style_fig(fig, xaxis_title="Variación mensual estimada (%)", height=380)
     fig.update_yaxes(autorange="reversed")
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
 
 
 def render_backtest(nowcast: dict[str, Any]) -> None:
@@ -173,14 +273,14 @@ def render_backtest(nowcast: dict[str, Any]) -> None:
 
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=df["date"], y=df["actual"], name="Oficial",
-                             mode="lines", line=dict(color=config.COLORS["headline"], width=2)))
+                             mode="lines", line=dict(color=PALETTE["headline"], width=2.5)))
     fig.add_trace(go.Scatter(x=df["date"], y=df["nowcast"], name="Nowcast",
-                             mode="lines", line=dict(color=config.COLORS["accent"], width=2, dash="dash")))
+                             mode="lines", line=dict(color=PALETTE["accent"], width=2.5, dash="dash")))
     if df["rem"].notna().any():
         fig.add_trace(go.Scatter(x=df["date"], y=df["rem"], name="REM",
-                                 mode="lines", line=dict(color=config.COLORS["rem"], width=1.5, dash="dot")))
+                                 mode="lines", line=dict(color=PALETTE["rem"], width=1.5, dash="dot")))
     _style_fig(fig, yaxis_title="Variación mensual (%)")
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
 
     metrics = bt.get("metrics", {})
     cols = st.columns(3)
@@ -210,7 +310,10 @@ def render_table(nowcast: dict[str, Any]) -> None:
 
 
 def _style_fig(fig: go.Figure, yaxis_title: str = "", xaxis_title: str = "", height: int = 420) -> None:
-    """Apply the shared dark theme to a Plotly figure.
+    """Apply the shared "Apple Crypto" theme to a Plotly figure.
+
+    Transparent canvas (so the page's frosted surface shows through), hairline
+    gridlines, Inter typography, and a dark frosted-glass hover label.
 
     Args:
         fig: The figure to style (modified in place).
@@ -218,12 +321,22 @@ def _style_fig(fig: go.Figure, yaxis_title: str = "", xaxis_title: str = "", hei
         xaxis_title: X-axis title.
         height: Figure height in pixels.
     """
+    axis_common = dict(
+        gridcolor=PALETTE["grid"], zeroline=False, showline=False,
+        ticks="", tickfont=dict(color=PALETTE["muted"], size=12),
+        title_font=dict(color=PALETTE["muted"], size=12),
+    )
     fig.update_layout(
-        paper_bgcolor=config.COLORS["bg"], plot_bgcolor=config.COLORS["surface"],
-        font=dict(color=config.COLORS["headline"], family="JetBrains Mono, monospace"),
-        xaxis=dict(title=xaxis_title, gridcolor=config.COLORS["border"]),
-        yaxis=dict(title=yaxis_title, gridcolor=config.COLORS["border"], zerolinecolor=config.COLORS["border"]),
-        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
+        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+        font=dict(color=PALETTE["muted"], family=PLOTLY_FONT, size=13),
+        xaxis=dict(title=xaxis_title, **axis_common),
+        yaxis=dict(title=yaxis_title, **axis_common),
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1,
+                    bgcolor="rgba(0,0,0,0)", font=dict(color=PALETTE["muted"], size=12)),
+        hoverlabel=dict(
+            bgcolor="rgba(28,28,30,0.92)", bordercolor=PALETTE["border"],
+            font=dict(color=PALETTE["headline"], family=PLOTLY_FONT, size=12),
+        ),
         margin=dict(l=40, r=20, t=30, b=40), height=height,
     )
 

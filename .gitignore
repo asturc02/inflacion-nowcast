@@ -27,3 +27,6 @@ env/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local Claude Code preview tooling
+.claude/
