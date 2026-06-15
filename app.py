@@ -76,6 +76,12 @@ CUSTOM_CSS = f"""
   -moz-osx-font-smoothing: grayscale;
 }}
 html, body, h1, h2, h3, h4, label, p, span, div, button, input {{ font-family: {FONT_STACK}; }}
+/* Keep Material icon ligatures (e.g. sidebar collapse arrow) on the icon font,
+   otherwise the broad span rule above leaks raw text like "keyboard_double_arrow_left". */
+[data-testid="stIconMaterial"], .material-icons, .material-symbols-rounded,
+.material-symbols-outlined, span[translate="no"] {{
+  font-family: 'Material Symbols Rounded', 'Material Symbols Outlined', 'Material Icons' !important;
+}}
 
 /* Tabular figures — Apple aligns numbers with SF's tnum, never a mono font. */
 [data-testid="stMetricValue"], .big-num, .muted, [data-testid="stTable"], .stDataFrame {{
