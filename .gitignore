@@ -1,0 +1,29 @@
+# Secrets
+.env
+
+# Raw downloads (large, regenerable). Processed sample IS committed for the demo.
+data/raw/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Tooling / editors
+.vscode/
+.idea/
+.DS_Store
+
+# Streamlit
+.streamlit/secrets.toml
