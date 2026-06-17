@@ -5,6 +5,10 @@
 > **area** (food, energy, transport, …) — and benchmarks the estimate against the BCRA
 > analyst consensus (REM). Interactive dashboard, Spanish UI, dark terminal aesthetic.
 
+### 🔗 Live demo → **https://inflacion-nowcast.streamlit.app/**
+
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://inflacion-nowcast.streamlit.app/)
+
 ![Dashboard screenshot placeholder](docs/screenshot.png)
 
 ---
